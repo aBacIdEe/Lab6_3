@@ -45,8 +45,19 @@ class Screen_CharacterSelection (tkinter.Frame):
         counter = 0
         for character in self.roster.character_list:
             character = str(character).split("; ")
-            button = tkinter.Radiobutton(self, text = f"{character[0]} {character[1]} {character[2]} {character[3]}" , variable = self.character_index, value = counter)
+            button = tkinter.Radiobutton(self, text = f"{character[0]}" , variable = self.character_index, value = counter)
             button.grid(row = counter, column = 0)
+            
+            self.smallImage = character[0].lower() + "_100.gif"
+            imageFile = tkinter.PhotoImage(file = "images/" + self.smallImage)
+            image = tkinter.Label(self, image = imageFile)
+            image.photo = imageFile
+            image.grid(row = counter, column = 1)
+
+            for i in range(2, 5):
+                detail = tkinter.Label(self, text = f"{character[i]}")
+                detail.grid(row = counter, column = i)
+            
             counter += 1
         
         self.confirm = tkinter.Button(self, text = "Confirm", command = self.selected_clicked)

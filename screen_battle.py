@@ -24,9 +24,9 @@ class Screen_Battle (tkinter.Frame):
         '''
         This method creates all of the (initial) widgets for the battle page.
         '''
-        self.p1 = tkinter.Label(self, text = self.player1.name)
+        self.p1 = tkinter.Label(self, text = self.player1.name + " " + str(self.player1.hit_points) + " HP")
         self.p1.grid(row = 0, column = 0)
-        self.p2 = tkinter.Label(self, text = self.player2.name)
+        self.p2 = tkinter.Label(self, text = self.player2.name + " " + str(self.player2.hit_points) + " HP")
         self.p2.grid(row = 0, column = 1)
 
         imageSmall = tkinter.PhotoImage(file = "images/" + self.player1.small_image)
@@ -63,14 +63,14 @@ class Screen_Battle (tkinter.Frame):
                 self.button.destroy()   
         '''        
         self.result1["text"] = self.player1.attack(self.player2)
-        self.p2["text"] = self.player2.name
+        self.p2["text"] = self.player2.name + " " + str(self.player2.hit_points) + " HP"
         if self.player2.hit_points <= 0:
             self.result3["text"] = self.player2.get_death_message()
             self.create_exit()
 
 
         self.result2["text"] = self.player2.attack(self.player2)
-        self.p1["text"] = self.player1.name
+        self.p1["text"] = self.player1.name + " " + str(self.player1.hit_points) + " HP"
         if self.player1.hit_points <= 0:
             self.result3["text"] = self.player1.get_death_message()
             self.create_exit()

@@ -24,21 +24,30 @@ class Screen_Battle (tkinter.Frame):
         '''
         This method creates all of the (initial) widgets for the battle page.
         '''
-        self.p1 = tkinter.Label(self, text = str(self.player1))
+        self.p1 = tkinter.Label(self, text = self.player1.name)
         self.p1.grid(row = 0, column = 0)
-        self.p2 = tkinter.Label(self, text = str(self.player2))
-        self.p2.grid(row = 1, column = 0)
+        self.p2 = tkinter.Label(self, text = self.player2.name)
+        self.p2.grid(row = 0, column = 1)
+
+        imageSmall = tkinter.PhotoImage(file = "images/" + self.player1.small_image)
+        w = tkinter.Label (self, image = imageSmall)
+        w.photo = imageSmall # saving the image as a property is required for "saving" the image. It's odd.
+        w.grid (row = 1, column = 0)
+        imageSmall = tkinter.PhotoImage(file = "images/" + self.player2.small_image)
+        w = tkinter.Label (self, image = imageSmall)
+        w.photo = imageSmall # saving the image as a property is required for "saving" the image. It's odd.
+        w.grid (row = 1, column = 1)
 
         self.attackBtn = tkinter.Button(self, text = "Attack", command = self.attack_clicked)
-        self.attackBtn.grid(row = 0, column = 1)
+        self.attackBtn.grid(row = 4, column = 1)
         
 
-        self.result1 = tkinter.Button(self, text = " ")
-        self.result1.grid(row = 2, column = 0, columnspan = 2)
-        self.result2 = tkinter.Button(self, text = " ")
-        self.result2.grid(row = 3, column = 0, columnspan = 2)
-        self.result3 = tkinter.Button(self, text = " ")
-        self.result3.grid(row = 4, column = 0, columnspan = 2)
+        self.result1 = tkinter.Label(self, text = " ")
+        self.result1.grid(row = 2, column = 0)
+        self.result2 = tkinter.Label(self, text = " ")
+        self.result2.grid(row = 2, column = 1)
+        self.result3 = tkinter.Label(self, text = " ")
+        self.result3.grid(row = 3, column = 0, columnspan = 2)
         
     def attack_clicked(self):
         ''' This method is called when the user presses the "Attack" button.
@@ -54,14 +63,14 @@ class Screen_Battle (tkinter.Frame):
                 self.button.destroy()   
         '''        
         self.result1["text"] = self.player1.attack(self.player2)
-        self.p2["text"] = str(self.player2)
+        self.p2["text"] = self.player2.name
         if self.player2.hit_points <= 0:
             self.result3["text"] = self.player2.get_death_message()
             self.create_exit()
 
 
         self.result2["text"] = self.player2.attack(self.player2)
-        self.p1["text"] = str(self.player1)
+        self.p1["text"] = self.player1.name
         if self.player1.hit_points <= 0:
             self.result3["text"] = self.player1.get_death_message()
             self.create_exit()
@@ -69,7 +78,7 @@ class Screen_Battle (tkinter.Frame):
     def create_exit(self):
         self.attackBtn.destroy()
         exit = tkinter.Button(self, text = "Exit", command = self.exit_clicked)
-        exit.grid(row = 1, column = 1)
+        exit.grid(row = 4, column = 1)
                                             
     def exit_clicked(self):
         ''' This method is called when the Exit button is clicked. 

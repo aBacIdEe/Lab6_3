@@ -21,9 +21,9 @@ class Screen_PrepareToBattle (tkinter.Frame):
         '''
         tkinter.Label(self, text = "You").grid(row = 0, column = 0)
         tkinter.Label(self, text = "Computer").grid(row = 0, column = 1)
-        player1 = tkinter.Label(self, text = str(self.player1))
+        player1 = tkinter.Label(self, text = self.player1.name)
         player1.grid(row = 1, column = 0)
-        player2 = tkinter.Label(self, text = str(self.player2))
+        player2 = tkinter.Label(self, text = self.player2.name)
         player2.grid(row = 1, column = 1)
 
         imageSmall = tkinter.PhotoImage(file = "images/" + self.player1.small_image)

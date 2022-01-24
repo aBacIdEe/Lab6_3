@@ -47,16 +47,16 @@ class Screen_CharacterSelection (tkinter.Frame):
             character = str(character).split("; ")
             button = tkinter.Radiobutton(self, text = f"{character[0]}" , variable = self.character_index, value = counter)
             button.grid(row = counter, column = 0)
-            
+
             self.smallImage = character[0].lower() + "_100.gif"
             imageFile = tkinter.PhotoImage(file = "images/" + self.smallImage)
             image = tkinter.Label(self, image = imageFile)
             image.photo = imageFile
             image.grid(row = counter, column = 1)
 
-            for i in range(2, 5):
+            for i in range(1, 4):
                 detail = tkinter.Label(self, text = f"{character[i]}")
-                detail.grid(row = counter, column = i)
+                detail.grid(row = counter, column = i + 1)
             
             counter += 1
         

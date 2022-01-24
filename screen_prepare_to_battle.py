@@ -19,13 +19,32 @@ class Screen_PrepareToBattle (tkinter.Frame):
         '''
         This method creates all of the widgets the prepare to battle page.
         '''
+        tkinter.Label(self, text = "You").grid(row = 0, column = 0)
+        tkinter.Label(self, text = "Computer").grid(row = 0, column = 1)
         player1 = tkinter.Label(self, text = str(self.player1))
-        player1.grid(row = 0, column = 0)
+        player1.grid(row = 1, column = 0)
         player2 = tkinter.Label(self, text = str(self.player2))
-        player2.grid(row = 1, column = 0)
+        player2.grid(row = 1, column = 1)
+
+        imageSmall = tkinter.PhotoImage(file = "images/" + self.player1.small_image)
+        w = tkinter.Label (self, image = imageSmall)
+        w.photo = imageSmall # saving the image as a property is required for "saving" the image. It's odd.
+        w.grid (row = 2, column = 0)
+        imageSmall = tkinter.PhotoImage(file = "images/" + self.player2.small_image)
+        w = tkinter.Label (self, image = imageSmall)
+        w.photo = imageSmall # saving the image as a property is required for "saving" the image. It's odd.
+        w.grid (row = 2, column = 1)
+
+        tkinter.Label(self, text = f"HP: {self.player1.hit_points}").grid(row = 3, column = 0)
+        tkinter.Label(self, text = f"HP: {self.player2.hit_points}").grid(row = 3, column = 1)
+        tkinter.Label(self, text = f"ATK: {self.player1.strength}").grid(row = 4, column = 0)
+        tkinter.Label(self, text = f"ATK: {self.player1.strength}").grid(row = 4, column = 1)
+        tkinter.Label(self, text = f"DEX: {self.player1.dexterity}").grid(row = 5, column = 0)
+        tkinter.Label(self, text = f"DEX: {self.player1.dexterity}").grid(row = 5, column = 1)
+
 
         battle = tkinter.Button(self, text = "Battle", command = self.commence_battle_clicked)
-        battle.grid(row = 1, column = 1)
+        battle.grid(row = 6, column = 1)
         
  
     def commence_battle_clicked(self):
